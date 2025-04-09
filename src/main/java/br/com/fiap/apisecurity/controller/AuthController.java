@@ -12,21 +12,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
 public class AuthController {
-   @Autowired
+    @Autowired
     private AuthenticationManager authenticationManager;
 
-   @PostMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthDTO authDTO) {
-    var userPwd = new UsernamePasswordAuthenticationToken(
-            authDTO.username(),
-            authDTO.password());
-    var auth = this.authenticationManager.authenticate(userPwd);
-    return ResponseEntity.ok().build();
-   }
+        var userPwd = new UsernamePasswordAuthenticationToken(
+                authDTO.username(),
+                authDTO.password());
+        var auth = this.authenticationManager.authenticate(userPwd);
+        return ResponseEntity.ok().build();
+    }
 
-   @PostMapping("/register")
-    public
-
+    @PostMapping("/register")
 }
