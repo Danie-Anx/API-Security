@@ -14,19 +14,25 @@ import java.util.UUID;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-        private UUID id;
-        private String username;
-        private String password;
-        private UserRole role;
+    private UUID id;
+    private String username;
+    private String password;
+    private UserRole role;
+
+    public User(String username, String password, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       if (UserRole.ADMIN.equals(role)) {
+        if (UserRole.ADMIN.equals(role)) {
             return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),
                     new SimpleGrantedAuthority("ROLE_USER"));
-       } else {
-           return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-       }
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
     }
 
     @Override
